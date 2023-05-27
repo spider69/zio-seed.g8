@@ -5,8 +5,6 @@ import zio._
 import zio.http.Server
 import zio.macros.accessible
 
-import java.net.InetSocketAddress
-
 @accessible
 trait HttpServer {
   def start(): IO[Error, Unit]
