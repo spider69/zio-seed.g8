@@ -6,12 +6,12 @@ import $organization;format="lower,package"$.$name;format="lower,snake,word"$.ap
 import $organization;format="lower,package"$.$name;format="lower,snake,word"$.errors.Errors.Error
 import sttp.tapir.server.ziohttp.ZioHttpInterpreter
 import zio._
-import zio.http.HttpApp
+import zio.http.App
 import zio.macros.accessible
 
 @accessible
 trait ApiRoutes {
-  def routes(): IO[Error, HttpApp[Any, Throwable]]
+  def routes(): IO[Error, App[Any]]
 }
 
 case class ApiRoutesImpl(
@@ -19,14 +19,14 @@ case class ApiRoutesImpl(
   healthRoute: HealthRoute,
   versionRoute: VersionRoute
 ) extends ApiRoutes {
-  override def routes(): IO[Error, HttpApp[Any, Throwable]] =
+  override def routes(): IO[Error, App[Any]] =
     for {
       health  <- healthRoute.get
       version <- versionRoute.get
       routes = List(health, version)
       swagger <- swaggerBuilder.build(routes.map(_.endpoint))
       api = ZioHttpInterpreter().toHttp(routes ++ swagger)
-    } yield api
+    } yield api.withDefaultErrorResponse
 }
 
 object ApiRoutesImpl {

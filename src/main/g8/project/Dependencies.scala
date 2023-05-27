@@ -3,23 +3,23 @@ import sbt._
 object Dependencies {
   object Versions {
     // logging
-    lazy val ZioLoggingVersion             = "2.1.7"
-    lazy val LogbackVersion                = "1.4.5"
-    lazy val LogbackLogstashEncoderVersion = "7.2"
+    lazy val ZioLoggingVersion             = "2.1.13"
+    lazy val LogbackVersion                = "1.4.7"
+    lazy val LogbackLogstashEncoderVersion = "7.3"
 
     // zio
-    lazy val ZioVersion       = "2.0.6"
+    lazy val ZioVersion       = "2.0.13"
     lazy val ZioConfigVersion = "3.0.7"
 
     // test
-    lazy val ZioMockVersion = "1.0.0-RC9"
+    lazy val ZioMockVersion = "1.0.0-RC11"
 
     // metrics
     lazy val ZioMetricsVersion = "2.0.1"
 
     // http
-    lazy val ZHttpVersion = "0.0.3"
-    lazy val TapirVersion = "1.2.6"
+    lazy val ZHttpVersion = "0.0.5"
+    lazy val TapirVersion = "1.4.0"
 
     // utils
     lazy val CodecsVersion = "1.15"

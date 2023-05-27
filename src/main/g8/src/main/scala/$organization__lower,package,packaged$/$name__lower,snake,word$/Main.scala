@@ -3,7 +3,7 @@ package $organization;format="lower,package"$.$name;format="lower,snake,word"$
 import $organization;format="lower,package"$.$name;format="lower,snake,word"$.api.routes.health.{HealthCheckerImpl, HealthRouteImpl}
 import $organization;format="lower,package"$.$name;format="lower,snake,word"$.api.routes.version.VersionRouteImpl
 import $organization;format="lower,package"$.$name;format="lower,snake,word"$.api.swagger.SwaggerBuilderImpl
-import $organization;format="lower,package"$.$name;format="lower,snake,word"$.api.{ApiRoutesImpl, HttpServer, HttpServerImpl}
+import $organization;format="lower,package"$.$name;format="lower,snake,word"$.api.{ApiRoutesImpl, HttpServer, HttpServerImpl, ZioServer}
 import $organization;format="lower,package"$.$name;format="lower,snake,word"$.config.Configuration
 import $organization;format="lower,package"$.$name;format="lower,snake,word"$.metrics.{MetricsExporter, MetricsExporterImpl}
 import zio.logging.backend.SLF4J
@@ -36,6 +36,8 @@ object Main extends ZIOAppDefault {
         HealthRouteImpl.layer,
         VersionRouteImpl.layer,
         ApiRoutesImpl.layer,
+        ZioServer.configLayer,
+        ZioServer.layer,
         HttpServerImpl.layer
       )
   }

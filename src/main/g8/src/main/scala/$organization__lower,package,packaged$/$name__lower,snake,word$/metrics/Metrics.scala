@@ -54,7 +54,7 @@ case class MetricsImpl(
   private def parseHost(): (String, String, String) = {
     val instance    = InetAddress.getLocalHost.getHostName
     val serviceName = BuildInfo.name.replace('_', '-')
-    val pattern     = s"\$serviceName-(.*)-(\\d+)-.*".r
+    val pattern     = s"\$serviceName-(.*)-(\\\\d+)-.*".r
     val (env, deployNum) = pattern.findFirstMatchIn(instance) match {
       case Some(m) => (m.group(1), m.group(2))
       case None    => ("", "")

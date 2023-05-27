@@ -2,9 +2,7 @@ package $organization;format="lower,package"$.$name;format="lower,snake,word"$.a
 
 import $organization;format="lower,package"$.$name;format="lower,snake,word"$.api.routes.ApiTestUtils.getJsonBody
 import sttp.tapir.server.ziohttp.ZioHttpInterpreter
-import sttp.tapir.ztapir.ZServerEndpoint
-import zio.http.model.Status
-import zio.http.{Path, Request, URL}
+import zio.http.{Path, Request, Status, URL}
 import zio.test.Assertion.equalTo
 import zio.test._
 
@@ -17,8 +15,8 @@ object VersionRouteSpec extends ZIOSpecDefault {
 
         val app = VersionRoute
           .get
-          .map(route => ZioHttpInterpreter().toHttp(List(route.asInstanceOf[ZServerEndpoint[Any, Any]])))
-          .flatMap(_.apply(req))
+          .map(route => ZioHttpInterpreter().toHttp(List(route)))
+          .flatMap(_.runZIO(req))
           .provide(VersionRouteImpl.layer)
 
         val result = for {
